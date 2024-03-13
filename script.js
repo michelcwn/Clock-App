@@ -5,27 +5,22 @@ const greeting = document.querySelector(".info__details__greeting");
 const currentTime = document.querySelector(".info__details__time");
 const currentLocation = document.querySelector(".info__details__location");
 
-const formatTime = function (dateString) {
-  const date = new Date(dateString);
-
-  let hours = date.getHours(); // Pas besoin de convertir pour le format 24 heures
-  let minutes = date.getMinutes();
-
-  // Formate les minutes pour avoir toujours deux chiffres
-  const minutesFormatted = minutes < 10 ? "0" + minutes : minutes;
-
-  // Construit et retourne la chaîne de caractères de l'heure au format "normal" (24 heures)
-  return `${hours}:${minutesFormatted}`;
-};
-
-const getCurrentHour = function (dateString) {
-  const date = new Date(dateString);
-
-  let hours = date.getHours();
-  return hours;
-};
-
 // IP
+
+async function getUserIP() {
+  try {
+    const response = await fetch("https://api.ipify.org?format=json");
+    const data = await response.json();
+    console.log("User IP:", data.ip); // Affiche l'adresse IP de l'utilisateur
+    return data.ip;
+  } catch (error) {
+    console.error("Unable to get user IP:", error);
+  }
+}
+
+// Appelle la fonction pour obtenir et afficher l'IP
+
+// IP & location
 
 const fetchIpData = async function (ip) {
   try {
@@ -42,9 +37,26 @@ const fetchIpData = async function (ip) {
   }
 };
 
-// fetchIpData("191.101.217.213");
+// Location & Time
 
-// Time
+const formatTime = function (dateString) {
+  const date = new Date(dateString);
+
+  let hours = date.getHours(); // Pas besoin de convertir pour le format 24 heures
+  let minutes = date.getMinutes();
+
+  // Formate les minutes pour avoir toujours deux chiffres
+  const minutesFormatted = minutes < 10 ? "0" + minutes : minutes;
+
+  return `${hours}:${minutesFormatted}`;
+};
+
+const getCurrentHour = function (dateString) {
+  const date = new Date(dateString);
+
+  let hours = date.getHours();
+  return hours;
+};
 
 const fetchTimeZone = async function (timezone) {
   try {
@@ -54,8 +66,6 @@ const fetchTimeZone = async function (timezone) {
     const data = await response.json();
 
     const dataString = data.utc_datetime;
-    // console.log(dataString);
-    //2024-03-13T10:19:33.800783+00:00
 
     greeting.textContent =
       getCurrentHour(dataString) < 12
@@ -73,11 +83,11 @@ const fetchTimeZone = async function (timezone) {
 // Exécution asynchrone pour chaîner les appels de fonction
 (async () => {
   try {
-    const timezone = await fetchIpData("191.101.217.213");
+    const userIp = await getUserIP();
+
+    const timezone = await fetchIpData(userIp);
     await fetchTimeZone(timezone);
   } catch (error) {
     console.error(error);
   }
 })();
-
-console.log(`Timezone from IP: '${timezone}'`);
