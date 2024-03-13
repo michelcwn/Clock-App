@@ -25,7 +25,26 @@ const getCurrentHour = function (dateString) {
   return hours;
 };
 
-// console.log(getCurrentHour("2024-03-23T18:20:33.800783+00:00"));
+// IP
+
+const fetchIpData = async function (ip) {
+  try {
+    const response = await fetch(
+      `https://api.ipbase.com/v2/info?apikey=ipb_live_tUCTl0qTbACJvV5AqOqV3FOpdCxUIJZbbRZJfiVX&ip=${ip}`
+    );
+    const data = await response.json();
+
+    const location = data.data.location.country.timezones[0];
+    console.log(location);
+    return location;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// fetchIpData("191.101.217.213");
+
+// Time
 
 const fetchTimeZone = async function (timezone) {
   try {
@@ -51,4 +70,14 @@ const fetchTimeZone = async function (timezone) {
   }
 };
 
-fetchTimeZone("Europe/Paris");
+// Exécution asynchrone pour chaîner les appels de fonction
+(async () => {
+  try {
+    const timezone = await fetchIpData("191.101.217.213");
+    await fetchTimeZone(timezone);
+  } catch (error) {
+    console.error(error);
+  }
+})();
+
+console.log(`Timezone from IP: '${timezone}'`);
