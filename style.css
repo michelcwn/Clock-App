@@ -1,8 +1,8 @@
-@font-face {
+/* @font-face {
   font-family: Inter;
   src: url(assets/Inter-VariableFont_slnt\wght.ttf);
   font-weight: 400;
-}
+} */
 
 :root {
   --color-black: #000000;
@@ -28,13 +28,29 @@ html {
 body {
   font-size: 1.8rem;
   line-height: 2.8rem;
-  font-family: "Inter", sans-serif;
   line-height: 2.8rem;
   min-height: 100vh;
-  background-image: url(assets/img/bg-test.jpg);
+  display: flex;
+  flex-direction: column-reverse;
   background-size: cover;
   background-repeat: no-repeat;
   color: var(--color-white);
+  position: relative;
+  overflow: hidden;
+}
+
+body::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background-image: inherit;
+  filter: blur(10px);
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
 }
 
 h1 {
@@ -64,6 +80,7 @@ h4 {
   line-height: 2.8rem;
   letter-spacing: 4px;
   text-transform: uppercase;
+  font-weight: 400;
 }
 
 h6 {
@@ -74,12 +91,12 @@ h6 {
   letter-spacing: 3px;
   font-weight: 600;
 }
+
 .main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   min-height: inherit;
-
   padding: 10rem 25rem;
 }
 
@@ -130,4 +147,19 @@ h6 {
 
 .info__more__button:hover .info__more__button__icon {
   opacity: 0.65;
+}
+
+.expand {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 10rem;
+  background-color: rgba(255, 255, 255, 0.65);
+  padding: 10rem 15rem;
+  color: var(--color-black);
+  z-index: 10;
+}
+
+.hidden {
+  display: none;
 }

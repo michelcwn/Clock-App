@@ -1,39 +1,23 @@
 "use strict";
-// DOM
 
-const greeting = document.querySelector(".info__details__greeting");
-const currentTime = document.querySelector(".info__details__time");
-const currentLocation = document.querySelector(".info__details__location");
-
-// IP
-
-async function getUserIP() {
+const fetchIpData = async (ip) => {
   try {
-    const response = await fetch("https://api.ipify.org?format=json");
-    const data = await response.json();
-    console.log("User IP:", data.ip); // Affiche l'adresse IP de l'utilisateur
-    return data.ip;
-  } catch (error) {
-    console.error("Unable to get user IP:", error);
-  }
-}
-
-// Appelle la fonction pour obtenir et afficher l'IP
-
-// IP & location
-
-const fetchIpData = async function (ip) {
-  try {
+    const apiKey = "715345b38ac446829cefc5657eafe8a4";
     const response = await fetch(
-      `https://api.ipbase.com/v2/info?apikey=ipb_live_tUCTl0qTbACJvV5AqOqV3FOpdCxUIJZbbRZJfiVX&ip=${ip}`
+      `https://api.ipgeolocation.io/ipgeo?apiKey=${apiKey}&ip=${ip}`
     );
+    if (!response.ok) {
+      throw new Error(
+        `Erreur lors de la récupération des données : ${response.statusText}`
+      );
+    }
     const data = await response.json();
+    console.log(data);
+    const { name } = data.time_zone;
 
-    const location = data.data.location.country.timezones[0];
-    console.log(location);
-    return location;
-  } catch (err) {
-    console.log(err);
+    return name;
+  } catch (error) {
+    console.error("Erreur lors de la récupération des informations IP:", error);
   }
 };
 
@@ -66,7 +50,11 @@ const fetchTimeZone = async function (timezone) {
     const data = await response.json();
 
     const dataString = data.utc_datetime;
-
+    // url(assets/img/bg-test.jpg)
+    bodyBackground.style.backgroundImage =
+      getCurrentHour(dataString) < 18
+        ? "url(assets/img/bg1.jpg)"
+        : "url(assets/img/bg2.jpg)";
     greeting.textContent =
       getCurrentHour(dataString) < 12
         ? "Good Morning, it's currently"
@@ -74,6 +62,7 @@ const fetchTimeZone = async function (timezone) {
         ? "Good Afternoon, it's currently"
         : "Good Evening, it's currently";
     currentLocation.textContent = data.timezone;
+    expandValueTimezone.textContent = data.timezone;
     currentTime.textContent = formatTime(dataString);
   } catch (error) {
     console.log(error);
@@ -81,11 +70,12 @@ const fetchTimeZone = async function (timezone) {
 };
 
 // Exécution asynchrone pour chaîner les appels de fonction
+
 (async () => {
   try {
     const userIp = await getUserIP();
-
     const timezone = await fetchIpData(userIp);
+
     await fetchTimeZone(timezone);
   } catch (error) {
     console.error(error);

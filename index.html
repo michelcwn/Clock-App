@@ -14,10 +14,13 @@
     <title>Clock App</title>
 
     <link rel="stylesheet" href="style.css" />
+    <script defer src="data/dataDOM.js"></script>
+    <script defer src="data/getIp.js"></script>
     <script defer src="script.js"></script>
+    <script defer src="data/expand.js"></script>
   </head>
   <body>
-    <main class="main">
+    <main class="main hidden">
       <div class="main__quote">
         <p class="main__quote__text">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut sed ea
@@ -49,9 +52,24 @@
       </div>
     </main>
 
-    <!-- Current timezone
-  Day of the year
-  Day of the week
-  Week number -->
+    <div class="expand">
+      <div class="expand__block expand__block--current-timezone">
+        <h4 class="expand__title">Current timezone</h4>
+        <h2 class="expand__value-timezone">Europe/London</h2>
+      </div>
+      <div class="expand__block expand__block--days-week">
+        <h4 class="expand__title">Days of the week</h4>
+        <h2 class="expand__value-days-week">5</h2>
+      </div>
+      <div class="expand__block expand__block--days">
+        <h4 class="expand__title">Day of the year</h4>
+        <h2 class="expand__value-days">295</h2>
+      </div>
+
+      <div class="expand__block expand__block--week-number">
+        <h4 class="expand__title">Week number</h4>
+        <h2 class="expand__value-week-number">42</h2>
+      </div>
+    </div>
   </body>
 </html>
