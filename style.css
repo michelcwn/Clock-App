@@ -1,0 +1,133 @@
+@font-face {
+  font-family: Inter;
+  src: url(assets/Inter-VariableFont_slnt\wght.ttf);
+  font-weight: 400;
+}
+
+:root {
+  --color-black: #000000;
+  --color-grey: #303030;
+  --color-white: #ffffff;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.8rem;
+  line-height: 2.8rem;
+  font-family: "Inter", sans-serif;
+  line-height: 2.8rem;
+  min-height: 100vh;
+  background-image: url(assets/img/bg-test.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: var(--color-white);
+}
+
+h1 {
+  font-weight: bold;
+  font-size: 20rem;
+  line-height: 20rem;
+  letter-spacing: 5px;
+}
+
+h2 {
+  font-weight: bold;
+  font-size: 5.6rem;
+  line-height: 6.8rem;
+  text-transform: uppercase;
+}
+
+h3 {
+  font-weight: bold;
+  font-size: 2.4rem;
+  line-height: 2.8rem;
+  letter-spacing: 4.8px;
+  text-transform: uppercase;
+}
+
+h4 {
+  font-size: 2rem;
+  line-height: 2.8rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+h6 {
+  color: var(--color-grey);
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  line-height: 2.8rem;
+  letter-spacing: 3px;
+  font-weight: 600;
+}
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: inherit;
+
+  padding: 10rem 25rem;
+}
+
+.main__quote {
+  display: flex;
+}
+
+.main__quote__text {
+  width: 50%;
+}
+
+.main__quote__icon {
+  width: 2.4rem;
+  height: 2.4rem;
+  filter: invert(100%);
+  margin-left: 2.5rem;
+
+  cursor: pointer;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.info__more {
+  align-self: flex-end;
+}
+
+.info__more__button {
+  background-color: var(--color-white);
+  padding: 1rem 1.5rem;
+  border: none;
+  border-radius: 50rem;
+  display: flex;
+  cursor: pointer;
+}
+
+/* Styles appliqués au bouton ou au conteneur de l'image */
+.info__more__button__icon {
+  background-color: var(--color-grey);
+  border-radius: 50rem;
+  padding: 0.25rem;
+  margin-left: 0.5rem;
+
+  transition: all 0.2s;
+}
+
+.info__more__button:hover .info__more__button__icon {
+  opacity: 0.65;
+}
