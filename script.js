@@ -5,21 +5,23 @@ console.log("https://github.com/michelcwn");
 const fetchIpData = async (ip) => {
   try {
     const apiKey = "854307c784774bf9bd848ba9c7e54e36";
-    const corsAnywhereUrl = "https://cors-anywhere.herokuapp.com/";
-    const apiUrl = `https://api.findip.net/${ip}/?token=${apiKey}`;
-    const response = await fetch(corsAnywhereUrl + apiUrl, {
-      headers: {
-        "X-Requested-With": "XMLHttpRequest", // Nécessaire pour CORS Anywhere
-      },
-    });
+    // Utilisation de AllOrigins
+    const allOriginsUrl = "https://api.allorigins.win/raw?url=";
+    const targetUrl = encodeURIComponent(
+      `https://api.findip.net/${ip}/?token=${apiKey}`
+    );
+    const response = await fetch(allOriginsUrl + targetUrl);
+
     if (!response.ok) {
       throw new Error(
         `Erreur lors de la récupération des données : ${response.statusText}`
       );
     }
+
     const data = await response.json();
 
-    const timezone = data.location.time_zone;
+    // Assurez-vous que le chemin d'accès à la timezone est correct selon la structure de l'objet JSON retourné
+    const timezone = data?.location?.time_zone;
 
     return timezone;
   } catch (error) {
