@@ -1,12 +1,17 @@
 "use strict";
 console.log("by michelcwn");
 console.log("https://github.com/michelcwn");
+
 const fetchIpData = async (ip) => {
   try {
     const apiKey = "854307c784774bf9bd848ba9c7e54e36";
-    const response = await fetch(
-      `https://api.findip.net/${ip}/?token=${apiKey}`
-    );
+    const corsAnywhereUrl = "https://cors-anywhere.herokuapp.com/";
+    const apiUrl = `https://api.findip.net/${ip}/?token=${apiKey}`;
+    const response = await fetch(corsAnywhereUrl + apiUrl, {
+      headers: {
+        "X-Requested-With": "XMLHttpRequest", // Nécessaire pour CORS Anywhere
+      },
+    });
     if (!response.ok) {
       throw new Error(
         `Erreur lors de la récupération des données : ${response.statusText}`
