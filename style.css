@@ -1,8 +1,8 @@
-/* @font-face {
+@font-face {
   font-family: Inter;
   src: url(assets/Inter-VariableFont_slnt\wght.ttf);
   font-weight: 400;
-} */
+}
 
 :root {
   --color-black: #000000;
@@ -26,6 +26,7 @@ html {
 }
 
 body {
+  font-family: "Inter", sans-serif;
   font-size: 1.8rem;
   line-height: 2.8rem;
   line-height: 2.8rem;
@@ -111,13 +112,9 @@ h6 {
   width: 60%;
 }
 
-.main__quote__text {
-}
-
 .main__quote__icon {
   width: 2.4rem;
   height: 2.4rem;
-  filter: invert(100%);
   margin-top: 1rem;
   margin-left: 1.5rem;
 
@@ -153,12 +150,28 @@ h6 {
 }
 
 /* Styles appliqués au bouton ou au conteneur de l'image */
-.info__more__button__icon {
+
+.info__greeting-container {
+  display: flex;
+}
+.info__icon {
+  margin-right: 1rem;
+}
+.arrow-down {
   background-color: var(--color-grey);
   border-radius: 50rem;
-  padding: 0.25rem;
+  padding: 0.75rem;
   margin-left: 0.5rem;
+  height: 2.5rem;
+  width: 2.5rem;
+  transition: all 0.2s;
+}
 
+.arrow-up {
+  background-color: var(--color-grey);
+  border-radius: 50rem;
+  margin-left: 0.5rem;
+  height: 2.5rem;
   transition: all 0.2s;
 }
 
@@ -175,6 +188,173 @@ h6 {
   padding: 10rem 15rem;
   color: var(--color-black);
   z-index: 10;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1250px) {
+  .main {
+    padding: 10rem 15rem;
+  }
+}
+
+.expand {
+  padding: 10rem;
+}
+
+h1 {
+  font-size: 16rem;
+}
+h2 {
+  font-size: 4rem;
+}
+
+.main__quote {
+  width: 100%;
+  text-align: center;
+}
+
+@media (max-width: 990px) {
+  h3 {
+    font-size: 2rem;
+  }
+  .expand {
+    gap: 5rem;
+    min-height: 50vh;
+  }
+}
+
+@media (max-width: 920px) {
+  .main {
+    justify-content: space-around;
+  }
+  .info {
+    display: flex;
+    flex-direction: column;
+  }
+  h3 {
+    font-size: 1.6rem;
+    letter-spacing: 3px;
+  }
+  .info__more {
+    align-self: flex-start;
+    margin-top: 2.5rem;
+  }
+}
+
+@media (max-width: 860px) {
+  p {
+    font-size: 1.6rem;
+  }
+  .expand {
+    padding: 8rem;
+    gap: 2.5rem;
+  }
+  h2 {
+    font-size: 3rem;
+    line-height: 5rem;
+  }
+  h4 {
+    font-size: 1.6rem;
+    line-height: 2rem;
+    letter-spacing: 3px;
+  }
+}
+
+@media (max-width: 700px) {
+  .main {
+    padding: 7.5rem 10rem;
+  }
+}
+
+@media (max-width: 630px) {
+  h2 {
+    font-size: 2.6rem;
+  }
+  .expand {
+    display: flex;
+    flex-direction: column;
+
+    padding: 7rem 4rem;
+  }
+  .expand__block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 590px) {
+  h1 {
+    font-size: 12rem;
+  }
+  .main {
+    padding: 5rem 7.5rem;
+  }
+}
+
+@media (max-width: 540px) {
+  h3 {
+    font-size: 1.6rem;
+    line-height: 3rem;
+    letter-spacing: 1px;
+  }
+}
+
+@media (max-width: 510px) {
+  h2 {
+    font-size: 2rem;
+  }
+  h4 {
+    letter-spacing: 2px;
+  }
+  .expand {
+    padding: 3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main {
+    padding: 5rem;
+  }
+}
+
+@media (max-width: 440px) {
+  h1 {
+    text-align: center;
+  }
+  h2 {
+    font-size: 1.6rem;
+  }
+  h4 {
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+  }
+  .main {
+    padding: 2.5rem;
+  }
+}
+
+@media (max-width: 385px) {
+  h3 {
+    font-size: 1.4rem;
+  }
+}
+@media (max-width: 350px) {
+  h1 {
+    font-size: 8rem;
+  }
+  h3 {
+    font-size: 1.2rem;
+  }
+}
+@media (max-width: 340px) {
+  h2 {
+    font-size: 1.4rem;
+  }
+  h4 {
+    font-size: 1.2rem;
+  }
 }
 
 .hidden {
