@@ -108,19 +108,30 @@ h6 {
 
 .main__quote {
   display: flex;
+  width: 60%;
 }
 
 .main__quote__text {
-  width: 50%;
 }
 
 .main__quote__icon {
   width: 2.4rem;
   height: 2.4rem;
   filter: invert(100%);
-  margin-left: 2.5rem;
+  margin-top: 1rem;
+  margin-left: 1.5rem;
 
   cursor: pointer;
+}
+
+.quote {
+  display: flex;
+  flex-direction: column;
+}
+
+.main__quote__author {
+  margin-top: 1.5rem;
+  font-weight: bold;
 }
 
 .info {

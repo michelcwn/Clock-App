@@ -8,6 +8,10 @@ const infoDetails = document.querySelector(".info__details");
 const quote = document.querySelector(".main__quote");
 const btn = document.querySelector(".info__more__button");
 
+// quote
+const quoteText = document.querySelector(".main__quote__text");
+const quoteAuthor = document.querySelector(".main__quote__author");
+const quoteIcon = document.querySelector(".main__quote__icon");
 // expand
 const expand = document.querySelector(".expand");
 const expandValueTimezone = document.querySelector(".expand__value-timezone");

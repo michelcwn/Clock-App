@@ -12,7 +12,7 @@ const fetchIpData = async (ip) => {
       );
     }
     const data = await response.json();
-    console.log(data);
+
     const timezone = data.location.time_zone;
 
     return timezone;
@@ -48,13 +48,13 @@ const fetchTimeZone = async function (timezone) {
       `http://worldtimeapi.org/api/timezone/${timezone}`
     );
     const data = await response.json();
-
+    console.log(data);
     const dataString = data.utc_datetime;
-    // url(assets/img/bg-test.jpg)
+
     bodyBackground.style.backgroundImage =
       getCurrentHour(dataString) < 18
-        ? "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(assets/desktop/bg-image-daytime.jpg)"
-        : "linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),url(assets/img/bg2.jpg)";
+        ? "linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),url(assets/desktop/bg-image-daytime.jpg)"
+        : "linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),url(assets/img/bg-image-nighttime.jpg)";
     greeting.textContent =
       getCurrentHour(dataString) < 12
         ? "Good Morning, it's currently"
