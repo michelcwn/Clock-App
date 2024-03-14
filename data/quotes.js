@@ -14,7 +14,7 @@ async function fetchQuote() {
       throw new Error("Network response was not ok");
     }
     const data = await response.json();
-    console.log(data);
+
     const { quote } = data[0];
     const { author } = data[0];
     quoteText.textContent = `"${quote}"`;

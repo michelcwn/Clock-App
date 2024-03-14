@@ -1,5 +1,6 @@
 "use strict";
-
+console.log("by michelcwn");
+console.log("https://github.com/michelcwn");
 const fetchIpData = async (ip) => {
   try {
     const apiKey = "854307c784774bf9bd848ba9c7e54e36";
@@ -12,7 +13,7 @@ const fetchIpData = async (ip) => {
       );
     }
     const data = await response.json();
-    console.log(data);
+
     const timezone = data.location.time_zone;
 
     return timezone;
@@ -45,10 +46,10 @@ const getCurrentHour = function (dateString) {
 const fetchTimeZone = async function (timezone) {
   try {
     const response = await fetch(
-      `http://worldtimeapi.org/api/timezone/${timezone}`
+      `https://worldtimeapi.org/api/timezone/${timezone}`
     );
     const data = await response.json();
-    console.log(data);
+
     const dataString = data.utc_datetime;
     const currentHour = getCurrentHour(dataString);
     // Sélection des icônes
