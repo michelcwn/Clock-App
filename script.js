@@ -2,9 +2,9 @@
 
 const fetchIpData = async (ip) => {
   try {
-    const apiKey = "715345b38ac446829cefc5657eafe8a4";
+    const apiKey = "854307c784774bf9bd848ba9c7e54e36";
     const response = await fetch(
-      `https://api.ipgeolocation.io/ipgeo?apiKey=${apiKey}&ip=${ip}`
+      `https://api.findip.net/${ip}/?token=${apiKey}`
     );
     if (!response.ok) {
       throw new Error(
@@ -13,9 +13,9 @@ const fetchIpData = async (ip) => {
     }
     const data = await response.json();
     console.log(data);
-    const { name } = data.time_zone;
+    const timezone = data.location.time_zone;
 
-    return name;
+    return timezone;
   } catch (error) {
     console.error("Erreur lors de la récupération des informations IP:", error);
   }
@@ -53,8 +53,8 @@ const fetchTimeZone = async function (timezone) {
     // url(assets/img/bg-test.jpg)
     bodyBackground.style.backgroundImage =
       getCurrentHour(dataString) < 18
-        ? "url(assets/img/bg1.jpg)"
-        : "url(assets/img/bg2.jpg)";
+        ? "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(assets/desktop/bg-image-daytime.jpg)"
+        : "linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),url(assets/img/bg2.jpg)";
     greeting.textContent =
       getCurrentHour(dataString) < 12
         ? "Good Morning, it's currently"
@@ -81,3 +81,30 @@ const fetchTimeZone = async function (timezone) {
     console.error(error);
   }
 })();
+
+// HANDLER
+let appliedEffects = false;
+
+btn.addEventListener("click", function (e) {
+  e.preventDefault();
+
+  quote.classList.toggle("hidden");
+  expand.classList.toggle("hidden");
+  main.style.minHeight = main.style.minHeight === "50vh" ? "100vh" : "50vh";
+
+  if (appliedEffects) {
+    // Si les effets sont déjà appliqués, les retirer
+    document.documentElement.style.setProperty("--after-left", "10");
+    document.documentElement.style.setProperty("--after-right", "10");
+    document.documentElement.style.setProperty("--after-bottom", "10");
+    document.documentElement.style.setProperty("--after-filter", "none");
+    appliedEffects = false; // Réinitialiser l'indicateur
+  } else {
+    // Si les effets ne sont pas appliqués, les appliquer
+    document.documentElement.style.setProperty("--after-left", "-10px");
+    document.documentElement.style.setProperty("--after-right", "-10px");
+    document.documentElement.style.setProperty("--after-bottom", "-10px");
+    document.documentElement.style.setProperty("--after-filter", "blur(10px)");
+    appliedEffects = true; // Mettre à jour l'indicateur
+  }
+});

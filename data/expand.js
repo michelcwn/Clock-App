@@ -5,10 +5,6 @@ function dayOfTheYear() {
   const oneDay = 1000 * 60 * 60 * 24;
   const day = Math.floor(difference / oneDay);
 
-  //   console.log(
-  //     `Aujourd'hui est le jour ${day} de l'année ${currentDay.getFullYear()}.`
-  //   );
-
   expandValueDays.textContent = `${day}`;
 }
 
