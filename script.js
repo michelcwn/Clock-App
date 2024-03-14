@@ -52,44 +52,46 @@ const fetchTimeZone = async function (timezone) {
 
     const dataString = data.utc_datetime;
     const currentHour = getCurrentHour(dataString);
+
     // Sélection des icônes
     const iconSun = document.querySelector(".info__icon--sun");
     const iconMoon = document.querySelector(".info__icon--moon");
 
-    // Déterminer quelle icône afficher
+    // Initialisation des variables pour les images
+    let imageUrl;
+
+    // Déterminer quelle icône afficher et choisir l'image correspondante
     if (currentHour >= 6 && currentHour < 18) {
       iconSun.classList.remove("hidden");
       iconMoon.classList.add("hidden");
-
-      // RESPOSIVE
-      const dayImageUrl =
+      imageUrl =
         window.innerWidth <= 375
           ? "assets/mobile/bg-image-daytime.jpg"
           : window.innerWidth <= 768
           ? "assets/tablet/bg-image-daytime.jpg"
           : "assets/desktop/bg-image-daytime.jpg";
-
-      const nightImageUrl =
+      greeting.textContent = "Good Morning, it's currently";
+    } else {
+      iconSun.classList.add("hidden");
+      iconMoon.classList.remove("hidden");
+      imageUrl =
         window.innerWidth <= 375
           ? "assets/mobile/bg-image-nighttime.jpg"
           : window.innerWidth <= 768
           ? "assets/tablet/bg-image-nighttime.jpg"
           : "assets/desktop/bg-image-nighttime.jpg";
-
-      bodyBackground.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),url(${dayImageUrl})`;
-      greeting.textContent = "Good Morning, it's currently";
-    } else {
-      iconSun.classList.add("hidden");
-      iconMoon.classList.remove("hidden");
-      expand.style.backgroundColor = "rgba(0, 0, 0, 0.25)";
-      expand.style.color = "var(--color-white)";
-      bodyBackground.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),url(${nightImageUrl})`;
-
       greeting.textContent =
         currentHour < 6
           ? "Good Night, it's currently"
           : "Good Evening, it's currently";
     }
+
+    // Appliquer l'image de fond
+    bodyBackground.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),url(${imageUrl})`;
+    expand.style.backgroundColor = "rgba(0, 0, 0, 0.25)";
+    expand.style.color = "var(--color-white)";
+
+    // Mettre à jour les contenus textuels
     currentLocation.textContent = data.timezone;
     expandValueTimezone.textContent = data.timezone;
     currentTime.textContent = formatTime(dataString);
