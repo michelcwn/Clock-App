@@ -4,6 +4,7 @@
 #####################################################
 *.sketch
 *.fig
+*.env
 
 # Avoid accidental XD upload if you convert the design file
 ###############################################
@@ -15,3 +16,6 @@
 .DS_Store
 
 .prettierignore
+
+# Ignore node_modules folder to avoid uploading it to Git
+node_modules/
