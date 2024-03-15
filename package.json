@@ -2,9 +2,9 @@
   "name": "clock-app",
   "version": "1.0.0",
   "description": "![Design preview for the Clock app coding challenge](./preview.jpg)",
-  "main": "script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +13,7 @@
     "dotenv": "^16.4.5"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.12.5"
+    "parcel": "^2.12.0",
+    "process": "^0.11.10"
   }
 }

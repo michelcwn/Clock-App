@@ -1,6 +1,16 @@
-"use strict";
 console.log("by michelcwn");
 console.log("https://github.com/michelcwn");
+
+console.log(process.env.API_NINJAS_KEY);
+console.log(process.env.API_FETCH_IP_KEY);
+
+// IMAGES
+import bgImageDaytimeMobile from "./assets/mobile/bg-image-daytime.jpg";
+import bgImageDaytimeTablet from "./assets/tablet/bg-image-daytime.jpg";
+import bgImageDaytimeDesktop from "./assets/desktop/bg-image-daytime.jpg";
+import bgImageNighttimeMobile from "./assets/mobile/bg-image-nighttime.jpg";
+import bgImageNighttimeTablet from "./assets/tablet/bg-image-nighttime.jpg";
+import bgImageNighttimeDesktop from "./assets/desktop/bg-image-nighttime.jpg";
 
 // DOM ELEMENTS
 const greeting = document.querySelector(".info__details__greeting");
@@ -45,12 +55,13 @@ async function getUserIP() {
 
 // GET QUOTES //
 let category = "life";
+
 async function fetchQuote() {
   const url = "https://api.api-ninjas.com/v1/quotes?category=" + category;
   const options = {
     method: "GET",
     headers: {
-      "X-Api-Key": "Ig0Y8WaBtSgFrRAAASmwgA==pDN7ZAyflo3Z6JhK",
+      "X-Api-Key": process.env.API_NINJAS_KEY,
     },
   };
 
@@ -78,7 +89,7 @@ fetchQuote();
 
 const fetchIpData = async (ip) => {
   try {
-    const apiKey = "854307c784774bf9bd848ba9c7e54e36";
+    const apiKey = process.env.API_FETCH_IP_KEY;
     // Utilisation de AllOrigins
     const allOriginsUrl = "https://api.allorigins.win/raw?url=";
     const targetUrl = encodeURIComponent(
@@ -146,10 +157,10 @@ const fetchTimeZone = async function (timezone) {
       iconMoon.classList.add("hidden");
       imageUrl =
         window.innerWidth <= 375
-          ? "assets/mobile/bg-image-daytime.jpg"
+          ? bgImageDaytimeMobile
           : window.innerWidth <= 768
-          ? "assets/tablet/bg-image-daytime.jpg"
-          : "assets/desktop/bg-image-daytime.jpg";
+          ? bgImageDaytimeTablet
+          : bgImageDaytimeDesktop;
       greeting.textContent = "Good Morning, it's currently";
       expand.style.backgroundColor = "rgba(255, 255, 255, 0.65)";
       expand.style.color = "var(--color-black)";
@@ -158,10 +169,10 @@ const fetchTimeZone = async function (timezone) {
       iconMoon.classList.remove("hidden");
       imageUrl =
         window.innerWidth <= 375
-          ? "assets/mobile/bg-image-nighttime.jpg"
+          ? bgImageNighttimeMobile
           : window.innerWidth <= 768
-          ? "assets/tablet/bg-image-nighttime.jpg"
-          : "assets/desktop/bg-image-nighttime.jpg";
+          ? bgImageNighttimeTablet
+          : bgImageNighttimeDesktop;
       greeting.textContent =
         currentHour < 6
           ? "Good Night, it's currently"
