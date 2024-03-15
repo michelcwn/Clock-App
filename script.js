@@ -1,9 +1,6 @@
 console.log("by michelcwn");
 console.log("https://github.com/michelcwn");
 
-console.log(process.env.API_NINJAS_KEY);
-console.log(process.env.API_FETCH_IP_KEY);
-
 // IMAGES
 import bgImageDaytimeMobile from "./assets/mobile/bg-image-daytime.jpg";
 import bgImageDaytimeTablet from "./assets/tablet/bg-image-daytime.jpg";
