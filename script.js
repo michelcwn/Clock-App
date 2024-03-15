@@ -19,7 +19,6 @@ const fetchIpData = async (ip) => {
     }
 
     const data = await response.json();
-
     // Assurez-vous que le chemin d'accès à la timezone est correct selon la structure de l'objet JSON retourné
     const timezone = data?.location?.time_zone;
 
@@ -56,7 +55,6 @@ const fetchTimeZone = async function (timezone) {
       `https://worldtimeapi.org/api/timezone/${timezone}`
     );
     const data = await response.json();
-
     const dataString = data.utc_datetime;
     const currentHour = getCurrentHour(dataString);
 
@@ -78,6 +76,8 @@ const fetchTimeZone = async function (timezone) {
           ? "assets/tablet/bg-image-daytime.jpg"
           : "assets/desktop/bg-image-daytime.jpg";
       greeting.textContent = "Good Morning, it's currently";
+      expand.style.backgroundColor = "rgba(255, 255, 255, 0.65)";
+      expand.style.color = "var(--color-black)";
     } else {
       iconSun.classList.add("hidden");
       iconMoon.classList.remove("hidden");
@@ -91,12 +91,12 @@ const fetchTimeZone = async function (timezone) {
         currentHour < 6
           ? "Good Night, it's currently"
           : "Good Evening, it's currently";
+      expand.style.backgroundColor = "rgba(0, 0, 0, 0.25)";
+      expand.style.color = "var(--color-white)";
     }
 
     // Appliquer l'image de fond
     bodyBackground.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),url(${imageUrl})`;
-    expand.style.backgroundColor = "rgba(0, 0, 0, 0.25)";
-    expand.style.color = "var(--color-white)";
 
     // Mettre à jour les contenus textuels
     currentLocation.textContent = data.timezone;
