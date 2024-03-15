@@ -1,6 +1,80 @@
 "use strict";
 console.log("by michelcwn");
 console.log("https://github.com/michelcwn");
+// DOM ELEMENTS
+const greeting = document.querySelector(".info__details__greeting");
+const currentTime = document.querySelector(".info__details__time");
+const currentLocation = document.querySelector(".info__details__location");
+const bodyBackground = document.querySelector("body");
+const main = document.querySelector(".main");
+const info = document.querySelector(".info");
+const infoDetails = document.querySelector(".info__details");
+const quote = document.querySelector(".main__quote");
+const btn = document.querySelector(".info__more__button");
+const btnText = document.querySelector(".info__more__button__text");
+const btnDown = document.querySelector(".arrow-down");
+const btnUp = document.querySelector(".arrow-up");
+
+// quote
+const quoteText = document.querySelector(".main__quote__text");
+const quoteAuthor = document.querySelector(".main__quote__author");
+const quoteIcon = document.querySelector(".main__quote__icon");
+
+// expand
+const expand = document.querySelector(".expand");
+const expandValueTimezone = document.querySelector(".expand__value-timezone");
+const expandValueDayWeek = document.querySelector(".expand__value-days-week");
+const expandValueDays = document.querySelector(".expand__value-days");
+const expandValueWeekNumber = document.querySelector(
+  ".expand__value-week-number"
+);
+
+// GET IP //
+
+async function getUserIP() {
+  try {
+    const response = await fetch("https://api.ipify.org?format=json");
+    const data = await response.json();
+    console.log("User IP:", data.ip); // Affiche l'adresse IP de l'utilisateur
+    return data.ip;
+  } catch (error) {
+    console.error("Unable to get user IP:", error);
+  }
+}
+
+// GET QUOTES //
+let category = "life";
+async function fetchQuote() {
+  const url = "https://api.api-ninjas.com/v1/quotes?category=" + category;
+  const options = {
+    method: "GET",
+    headers: {
+      "X-Api-Key": "Ig0Y8WaBtSgFrRAAASmwgA==pDN7ZAyflo3Z6JhK",
+    },
+  };
+
+  try {
+    const response = await fetch(url, options);
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+
+    const { quote } = data[0];
+    const { author } = data[0];
+    quoteText.textContent = `"${quote}"`;
+    quoteAuthor.textContent = author;
+  } catch (error) {
+    console.error("Could not fetch the quote:", error);
+  }
+}
+
+quoteIcon.addEventListener("click", fetchQuote);
+
+fetchQuote();
+
+// FETCH IP DATA //
+
 const fetchIpData = async (ip) => {
   try {
     const apiKey = "854307c784774bf9bd848ba9c7e54e36";
@@ -43,6 +117,7 @@ const getCurrentHour = function (dateString) {
   return hours;
 };
 
+// TIMEZONE //
 const fetchTimeZone = async function (timezone) {
   try {
     const response = await fetch(
@@ -144,3 +219,38 @@ btn.addEventListener("click", function (e) {
 
   btnText.textContent = btnText.textContent === "more" ? "less" : "more";
 });
+
+// EXPAND //
+
+function dayOfTheYear() {
+  const currentDay = new Date();
+  const startYear = new Date(currentDay.getFullYear(), 0, 0);
+  const difference = currentDay - startYear;
+  const oneDay = 1000 * 60 * 60 * 24;
+  const day = Math.floor(difference / oneDay);
+
+  expandValueDays.textContent = `${day}`;
+}
+
+dayOfTheYear();
+
+function dayOfTheWeek() {
+  const now = new Date();
+  const dayOfTheWeek = now.getDay();
+  const correctedDay = dayOfTheWeek === 0 ? 7 : dayOfTheWeek;
+
+  expandValueDayWeek.textContent = `${correctedDay}`;
+}
+
+dayOfTheWeek();
+
+function getWeekNumber() {
+  const now = new Date();
+  const FirstJanuary = new Date(now.getFullYear(), 0, 1);
+  const days = Math.floor((now - FirstJanuary) / (24 * 60 * 60 * 1000));
+  const weekNumber = Math.ceil((now.getDay() + 1 + days) / 7);
+
+  expandValueWeekNumber.textContent = `${weekNumber}`;
+}
+
+getWeekNumber();
